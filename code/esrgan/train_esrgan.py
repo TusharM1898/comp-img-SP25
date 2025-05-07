@@ -51,11 +51,6 @@ def fine_tune_esrgan():
     generator = ESRGANGenerator(upscale_factor=UPSCALE_FACTOR).to(DEVICE)
     discriminator = ESRGANDiscriminator().to(DEVICE)
 
-    # Load pretrained SRGAN generator weights
-    srgan_checkpoint = torch.load("/Users/tusharmuley/Desktop/Fall24/MLSP/Project/Super-Resolution-for-Medical-Images-main/mine_srgan/loaded_srgan/model/netG_epoch1.pth", map_location=DEVICE)
-    generator.load_state_dict(srgan_checkpoint["model"], strict=False)
-    print("[INFO] Pretrained SRGAN Generator Loaded")
-
     # Loss and Optimizers
     loss_fn = ESRGANLoss().to(DEVICE)
     optimizerG = torch.optim.AdamW(generator.parameters(), lr=1e-4)
