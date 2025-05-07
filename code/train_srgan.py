@@ -51,11 +51,6 @@ val_dataloader = DataLoader(val_dataset, batch_size=2, shuffle=False)
 generator = Generator(upscale_factor=4).to(DEVICE)
 discriminator = Discriminator().to(DEVICE)
 
-#generator.load_state_dict(torch.load("./model/netG.pth.tar")["model"])
-generator.load_state_dict(torch.load("./model/netG.pth.tar", map_location=torch.device('cpu'))["model"])
-generator.train()
-discriminator.train()
-
 # Define loss functions
 criterion_content = nn.MSELoss()
 criterion_adversarial = nn.BCEWithLogitsLoss()
